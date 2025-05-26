@@ -9,7 +9,7 @@ export async function getCabins() {
   }
   return data;
 }
-
+ 
 export async function deleteCabin(id) {
   const { error } = await supabase.from("cabins").delete().eq("id", id);
 
@@ -41,6 +41,8 @@ export async function createEditCabin(newCabin, id) {
   const { data, error } = await query.select().single();
 
   // Image uploading
+  if (hasImagePath) return data;
+
   const { error: storageError } = await supabase.storage
     .from("cabin-images")
     .upload(imageName, newCabin.image);
