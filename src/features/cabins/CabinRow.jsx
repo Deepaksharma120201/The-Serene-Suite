@@ -72,7 +72,7 @@ function CabinRow({ cabin }) {
       {discount ? (
         <Discount>{formatCurrency(discount)}</Discount>
       ) : (
-        <span>&nbsp;</span>
+        <span>-</span>
       )}
       <div>
         <Modal>
