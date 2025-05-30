@@ -8,14 +8,16 @@ import ButtonGroup from "../../ui/ButtonGroup";
 import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
 import Spinner from "../../ui/Spinner";
-import { useBooking } from "./useBooking";
+import Modal from "../../ui/Modal";
+import Empty from "../../ui/Empty";
+import ConfirmDelete from "../../ui/ConfirmDelete";
+
 import { useMoveBack } from "../../hooks/useMoveBack";
 import { useNavigate } from "react-router-dom";
 import { HiArrowDownOnSquare, HiArrowUpOnSquare } from "react-icons/hi2";
 import { useCheckout } from "../check-in-out/useCheckout";
-import Modal from "../../ui/Modal";
+import { useBooking } from "./useBooking";
 import { useDeleteBooking } from "./useDeleteBooking";
-import ConfirmDelete from "../../ui/ConfirmDelete";
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -32,6 +34,8 @@ function BookingDetail() {
   const moveBack = useMoveBack();
 
   if (isLoading) return <Spinner />;
+  if (!booking) return <Empty resource="booking" />;
+
   const { status, id: bookingId } = booking;
 
   const statusToTagName = {
